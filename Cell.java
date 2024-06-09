@@ -70,7 +70,7 @@ public class Cell extends Actor
             return;
         }
         if (!world.isStarted()) {
-            world.start();
+            world.start(y,x);
         }
         if (bomb)
         {

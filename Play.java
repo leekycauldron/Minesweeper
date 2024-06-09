@@ -24,8 +24,6 @@ public class Play extends World
     public Play(int width, int height)
     {    
         super(width, height+1, 25); 
-        System.out.println(getWidth());
-        System.out.println(getHeight());
         
         // Populate grid with cells.
         grid = new Cell[width][height];
@@ -114,20 +112,28 @@ public class Play extends World
         return started;
     }
     
-    public void start() {
+    public void start(int startRow, int startCol) {
         timer.mark();
         started = true;
         int bombs = 0;
+    
         while (bombs < bombCount) {
             int randomRow = Greenfoot.getRandomNumber(grid.length);
             int randomCol = Greenfoot.getRandomNumber(grid[0].length);
-            
-            if(!grid[randomRow][randomCol].isRevealed() && !grid[randomRow][randomCol].hasBomb()) {
+    
+            // Check if the random cell is within two cells of the starting cell
+            if (Math.abs(randomRow - startRow) <= 2 && Math.abs(randomCol - startCol) <= 2) {
+                continue; // Skip placing a bomb in the 5x5 area around the starting cell
+            }
+    
+            // Ensure the cell is neither revealed nor already has a bomb
+            if (!grid[randomRow][randomCol].isRevealed() && !grid[randomRow][randomCol].hasBomb()) {
                 grid[randomRow][randomCol].placeBomb(); 
                 bombs++;
             }
         }
     }
+
     
     public void revealBombs()
     {
