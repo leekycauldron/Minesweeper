@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Play
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Play\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=width\ height
+comment1.target=Play(int,\ int)
+comment2.params=
+comment2.target=boolean\ isLose()
+comment3.params=
+comment3.target=boolean\ isStarted()
+comment4.params=
+comment4.target=void\ start()
+comment5.params=
+comment5.target=void\ revealBombs()
+comment6.params=x\ y
+comment6.target=void\ checkAdjacentBombs(int,\ int)
+numComments=7

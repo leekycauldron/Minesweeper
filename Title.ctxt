@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Title
+comment0.text=\r\n\ Title\ Screen\ where\ user\ can\ adjust\ game\ settings.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew,\ David\r\n
+comment1.params=
+comment1.target=Title()
+comment2.params=
+comment2.target=void\ prepare()
+numComments=3

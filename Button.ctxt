@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Button
+comment1.params=normalImageFile\ hoveredImageFile
+comment1.target=Button(java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Constructor\ to\ initialize\ the\ button\ with\ images\ for\ both\ states.\r\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Act\ method\ to\ check\ for\ mouse\ hover\ state.\r\n
+comment3.params=clickAction
+comment3.target=void\ setOnClickAction(java.lang.Runnable)
+numComments=4
