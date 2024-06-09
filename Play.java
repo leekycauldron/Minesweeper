@@ -202,7 +202,7 @@ public class Play extends World
                 int adjX = coord[0];
                 int adjY = coord[1];
                 try {  
-                    if(!grid[adjY][adjX].isRevealed()) {
+                    if(!grid[adjY][adjX].isRevealed() && !grid[adjY][adjX].isFlagged()) {
                         grid[adjY][adjX].algoReveal();
                         checkAdjacentBombs(adjX,adjY);
                         
