@@ -45,13 +45,16 @@ public class Cell extends Actor
     
     private void toggleFlag()
     {
+        Play world = (Play) getWorld();
         if (flagged)
         {
+            world.removeFlag();
             flagged = false;
             setImage(new GreenfootImage("cell.png")); // Change back to the default cell image
         }
         else
         {
+            world.placeFlag();
             flagged = true;
             setImage(new GreenfootImage("flag.png")); // Change to the flagged image
         }
@@ -63,7 +66,7 @@ public class Cell extends Actor
         revealed = true;
         Play world = (Play) getWorld();
         
-        if (world.isLose()) {
+        if (world.getState() != 0) {
             return;
         }
         if (!world.isStarted()) {
