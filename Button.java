@@ -6,8 +6,13 @@ public class Button extends Actor {
     private Runnable clickAction = null;
     
     /**
-     * Constructor to initialize the button with images for both states.
+     * Constructs a new Button object with specified images for its normal and hovered states.
+     * The images are scaled to fit the button size.
+     *
+     * @param normalImageFile the file path for the normal state image.
+     * @param hoveredImageFile the file path for the hovered state image.
      */
+
     public Button(String normalImageFile, String hoveredImageFile) {
         // Load the images from the files
         normalImage = new GreenfootImage(normalImageFile);
@@ -20,9 +25,7 @@ public class Button extends Actor {
         setImage(normalImage);
     }
     
-    /**
-     * Act method to check for mouse hover state.
-     */
+    
     public void act() {
         if (Greenfoot.mouseMoved(this)) {
             // Change to the hovered image if the mouse is over the button

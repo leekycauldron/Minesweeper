@@ -3,8 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Cell here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew, David
  */
 public class Cell extends Actor
 {
@@ -13,19 +12,34 @@ public class Cell extends Actor
     private boolean flagged = false;
     private int x;
     private int y;
+    
+    /**
+     * Constructs a new Cell object with specified coordinates.
+     *
+     * @param x the x-coordinate of the cell.
+     * @param y the y-coordinate of the cell.
+     */
+
     public Cell(int x, int y) {
-        GreenfootImage img = getImage();
-        img.scale(25,25);
-        setImage(img);
+        
         this.x = x;
         this.y = y;
+    }
+    
+    public void prepare() {
+        Play world = (Play) getWorld();
+        GreenfootImage img = new GreenfootImage(world.getTheme()+"cell.png");
+        img.scale(25, 25);
+        setImage(img);
     }
     public void act()
     {
         if (Greenfoot.mouseClicked(this))
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+            GreenfootSound sound = new GreenfootSound("tick.wav");
+            sound.play();
+
             if (mouse.getButton() == 1) // Left click
             {
                 if (!revealed && !flagged)
@@ -50,13 +64,13 @@ public class Cell extends Actor
         {
             world.removeFlag();
             flagged = false;
-            setImage(new GreenfootImage("cell.png")); // Change back to the default cell image
+            setImage(new GreenfootImage(world.getTheme()+"cell.png")); // Change back to the default cell image
         }
         else
         {
             world.placeFlag();
             flagged = true;
-            setImage(new GreenfootImage("flag.png")); // Change to the flagged image
+            setImage(new GreenfootImage(world.getTheme()+"flag.png")); // Change to the flagged image
         }
     }
     
@@ -74,39 +88,65 @@ public class Cell extends Actor
         }
         if (bomb)
         {
-            setImage(new GreenfootImage("explode.png")); // Set the image to bomb
+            setImage(new GreenfootImage(world.getTheme()+"explode.png")); // Set the image to bomb
             
             world.revealBombs();
         }
         else
         {
             // Code to handle revealing the cell when it is not a bomb
-            setImage(new GreenfootImage("revealed.png")); // Replace with your own revealed cell image
+            setImage(new GreenfootImage(world.getTheme()+"revealed.png")); // Replace with your own revealed cell image
             
             world.checkAdjacentBombs(x,y);
         }
     }
     
+    /**
+     * Reveals the cell and updates its image based on the current theme.
+     */
     public void algoReveal() {
         revealed = true;
-        setImage(new GreenfootImage("revealed.png"));
+        Play world = (Play) getWorld();
+        setImage(new GreenfootImage(world.getTheme()+"revealed.png"));
     }
+    
+    /**
+     * Hides the cell by marking it as not revealed.
+     */
     public void unReveal() {
         revealed = false;
     }
 
+    /**
+     * Checks if the cell is currently revealed.
+     * 
+     * @return true if the cell is revealed, false otherwise.
+     */
     public boolean isRevealed() {
         return revealed;
     }
     
+    /**
+     * Checks if the cell is flagged.
+     * 
+     * @return true if the cell is flagged, false otherwise.
+     */
     public boolean isFlagged() {
         return flagged;
     }
     
+    /**
+     * Checks if the cell contains a bomb.
+     * 
+     * @return true if the cell contains a bomb, false otherwise.
+     */
     public boolean hasBomb() {
         return bomb;
     }
     
+    /**
+     * Places a bomb in the cell.
+     */
     public void placeBomb() {
         bomb = true;
     }

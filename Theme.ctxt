@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Theme
+comment1.params=
+comment1.target=java.lang.String\ getName()
+comment2.params=fname\ index\ store
+comment2.target=Theme(java.lang.String,\ int,\ boolean)
+comment2.text=\r\n\ Constructs\ a\ new\ Theme\ object,\ setting\ its\ appearance\ based\ on\ ownership\ status.\r\n\ If\ the\ theme\ is\ already\ owned,\ it\ displays\ an\ "owned"\ image,\ otherwise\ a\ standard\ image.\r\n\r\n\ @param\ fname\ the\ file\ name\ for\ the\ theme's\ image.\r\n\ @param\ index\ the\ index\ of\ the\ theme\ in\ a\ collection\ or\ list.\r\n\ @param\ store\ a\ boolean\ indicating\ if\ the\ theme\ is\ being\ accessed\ from\ the\ store.\r\n
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ buy()
+comment4.text=\r\n\ Attempts\ to\ purchase\ the\ theme\ if\ the\ player\ has\ enough\ coins.\ It\ updates\ the\ coin\ balance,\r\n\ marks\ the\ theme\ as\ owned,\ and\ updates\ the\ theme's\ image\ to\ indicate\ ownership.\r\n
+comment5.params=
+comment5.target=java.lang.String\ getFname()
+comment6.params=index
+comment6.target=java.lang.String\ getBuyStatus(int)
+comment7.params=lineIndex
+comment7.target=void\ updateBuyStatus(int)
+comment8.params=clickAction
+comment8.target=void\ setOnClickAction(java.lang.Runnable)
+numComments=9

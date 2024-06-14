@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Utils
+comment1.params=
+comment1.target=int\ getCoins()
+comment1.text=\r\n\ Retrieves\ the\ current\ number\ of\ coins\ from\ a\ specified\ file.\ It\ reads\ the\ value\ from\ the\ second\ line\r\n\ of\ the\ file\ ("settings.txt").\ If\ there\ is\ an\ error\ reading\ the\ file\ or\ if\ the\ line\ cannot\ be\ parsed\ to\ an\ integer,\r\n\ it\ returns\ 0.\r\n\r\n\ @return\ The\ number\ of\ coins,\ or\ 0\ in\ case\ of\ an\ error\ or\ if\ the\ line\ is\ empty.\r\n
+comment2.params=coinsToAdd
+comment2.target=void\ updateCoins(int)
+comment2.text=\r\n\ Updates\ the\ number\ of\ coins\ by\ adding\ a\ specified\ amount.\ This\ could\ be\ positive\ (gaining\ coins)\r\n\ or\ negative\ (spending\ coins).\r\n\r\n\ @param\ coinsToAdd\ the\ number\ of\ coins\ to\ add\ to\ the\ current\ count.\ This\ value\ can\ be\ negative.\r\n
+comment3.params=coins
+comment3.target=void\ saveCoins(int)
+comment4.params=filePath\ lineNumber\ newLineValue
+comment4.target=void\ changeLineValue(java.lang.String,\ int,\ java.lang.String)
+comment4.text=\r\n\ Modifies\ a\ specific\ line\ in\ a\ file\ to\ a\ new\ value.\ If\ the\ specified\ line\ number\ exceeds\ the\ number\ of\ lines\r\n\ in\ the\ file,\ an\ exception\ is\ thrown.\r\n\r\n\ @param\ filePath\ the\ path\ to\ the\ file.\r\n\ @param\ lineNumber\ the\ line\ number\ to\ modify\ (zero-based\ index).\r\n\ @param\ newLineValue\ the\ new\ value\ to\ set\ at\ the\ specified\ line.\r\n\ @throws\ IOException\ if\ there's\ an\ error\ reading\ from\ or\ writing\ to\ the\ file.\r\n\ @throws\ IllegalArgumentException\ if\ the\ specified\ line\ number\ does\ not\ exist\ in\ the\ file.\r\n
+comment5.params=filePath\ lineNumber
+comment5.target=java.lang.String\ getLineValue(java.lang.String,\ int)
+comment5.text=\r\n\ Retrieves\ the\ value\ of\ a\ specific\ line\ from\ a\ text\ file.\r\n\ \r\n\ @param\ filePath\ \ \ the\ path\ to\ the\ text\ file\r\n\ @param\ lineNumber\ the\ line\ number\ to\ retrieve\ (1-based\ index)\r\n\ @return\ the\ content\ of\ the\ specified\ line\r\n\ @throws\ IOException\ if\ an\ I/O\ error\ occurs\ or\ the\ line\ number\ is\ invalid\r\n
+numComments=6

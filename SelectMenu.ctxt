@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=SelectMenu
+comment1.params=
+comment1.target=SelectMenu()
+comment2.params=
+comment2.target=void\ prepare()
+comment3.params=filePath
+comment3.target=void\ loadOwnedThemes(java.lang.String)
+comment3.text=\r\n\ Load\ the\ owned\ themes\ from\ the\ settings\ file.\r\n
+comment4.params=
+comment4.target=void\ selectPreviousTheme()
+comment4.text=\r\n\ Select\ the\ previous\ theme\ in\ the\ list,\ looping\ to\ the\ end\ if\ at\ the\ start.\r\n
+comment5.params=
+comment5.target=void\ selectNextTheme()
+comment5.text=\r\n\ Select\ the\ next\ theme\ in\ the\ list,\ looping\ to\ the\ start\ if\ at\ the\ end.\r\n
+comment6.params=
+comment6.target=java.lang.String\ getTheme()
+comment6.text=\r\n\ Retrieves\ the\ file\ name\ of\ the\ current\ theme.\r\n\ \r\n\ @return\ The\ file\ name\ of\ the\ current\ theme\ as\ a\ string.\r\n
+comment7.params=
+comment7.target=void\ updateThemeDisplay()
+comment7.text=\r\n\ Update\ the\ theme\ display\ to\ show\ the\ currently\ selected\ theme.\r\n
+numComments=8

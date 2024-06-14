@@ -10,11 +10,19 @@ import java.io.IOException;
  */
 public class Title extends World
 {
+    // Make true, if you want to give yourself 10000 coins on startup.
+    // Used to be able to test themes/powerups without grinding.
+    private boolean DEVELOPERMODE = false;
+    
     String difficulty = "";
     
     public Title()
     {    
-        super(600, 400, 1); 
+        super(720, 600, 1); 
+        
+        if(DEVELOPERMODE) {
+            Utils.updateCoins(10000);
+        }
         
         prepare();
     }
@@ -30,6 +38,13 @@ public class Title extends World
         int x = (getWidth() - titleImage.getWidth()) / 2;
         int y = 1;
         getBackground().drawImage(titleImage, x, y);
+        
+        GreenfootImage coinImage = new GreenfootImage("coin.png");
+        coinImage.scale(25,25);
+        getBackground().drawImage(coinImage, getWidth()-100,25);
+        
+        Label coinLabel = new Label(Utils.getCoins(), 30);
+        addObject(coinLabel,getWidth()-50,37);
 
         Button play = new Button("1.png", "2.png");
         Button store = new Button("5.png", "6.png");

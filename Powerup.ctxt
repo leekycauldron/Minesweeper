@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Powerup
+comment0.text=\r\n\ Unfortunately,\ this\ feature\ was\ NOT\ implemented\ due\ to\ time\ restrictions,\ but\ remains\ in\ the\ store\ and\ is\ \r\n\ still\ purchasable\r\n
+comment1.params=fname\ index
+comment1.target=Powerup(java.lang.String,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ buy()
+comment4.params=index
+comment4.target=int\ getBuyStatus(int)
+comment5.params=lineIndex
+comment5.target=void\ updateBuyStatus(int)
+comment6.params=clickAction
+comment6.target=void\ setOnClickAction(java.lang.Runnable)
+numComments=7

@@ -1,16 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 
 /**
- * Write a description of class Play here.
+ * Main play grid, changes based on difficulty level.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Bryson, Bonnie, Matthew David 
  */
 public class Play extends World
 {
+    
+    
+    
 
     private Cell[][] grid;
     private int bombCount; 
@@ -21,9 +24,20 @@ public class Play extends World
     private SimpleTimer timer = new SimpleTimer();
     private Label timeLabel;
     private State s;
+    private boolean addedCoins = false;
+    private String theme;
+    
     public Play(int width, int height)
     {    
         super(width, height+1, 25); 
+ 
+        try {
+            theme = Utils.getLineValue("settings.txt",10);
+        } catch (IOException e){
+            theme = "default";
+        }
+        
+        
         
         // Populate grid with cells.
         grid = new Cell[width][height];
@@ -31,6 +45,7 @@ public class Play extends World
             for(int j = 0; j < height; j++) {
                 grid[i][j] = new Cell(j,i);
                 addObject(grid[i][j],i,j+1);
+                grid[i][j].prepare();
             }
         }
         // Set number of bombs to be spawned based on difficulty.
@@ -49,7 +64,10 @@ public class Play extends World
         addObject(timeLabel,getWidth()-1,0);
         s = new State();
         addObject(s, getWidth()/2,0);
+        
+        
     }
+    
     
     public void act() {
         removeObject(flagLabel);
@@ -79,39 +97,105 @@ public class Play extends World
                 }
                 if(!done) break;
             }
-            if(done) {
+            if(done && !addedCoins) {
+                addedCoins = true;
                 state = 1;
+                int seconds = (int) (timer.millisElapsed() / 1000);
+                int coinsEarned = 0;
+                switch(grid.length) {
+                    case 9:
+                        coinsEarned = 500;
+                        break;
+                    case 16:
+                        coinsEarned = 1000;
+                        break;
+                    case 30:
+                        coinsEarned = 1500;
+                }
+                coinsEarned -= seconds;
+                if(coinsEarned < 0) {
+                    coinsEarned = 0;
+                }
+                Utils.updateCoins(coinsEarned);
+                
+                Label l = new Label("+"+coinsEarned+" coins." ,17);
+                l.setFillColor(Color.BLACK);
+                addObject(l,getWidth()/2+2,0);
                 s.win();
+                GreenfootSound sound = new GreenfootSound("win.wav");
+                sound.play();
             }
         }
     }
     
+    
+    /**
+     * Retrieves the current state of the game.
+     * 
+     * @return The current state as an integer.
+     */
     public int getState() {
         return state;
     }
     
+    
+    /**
+     * Retrieves the current theme.
+     * 
+     * @return The current theme as a string.
+     */
+
+    public String getTheme() {
+        return theme;
+    }
+    
+    
+    /**
+     * Checks if all cells in the grid are either flagged or revealed.
+     * 
+     * @return true if all cells are flagged or revealed, false otherwise.
+     */
+
     public boolean allCellsFlaggedOrRevealed() {
-    for (int x = 0; x < grid.length; x++) {
-        for (int y = 0; y < grid[x].length; y++) {
-            Cell cell = grid[x][y];
-            if (!cell.isRevealed() && !cell.isFlagged()) {
-                return false;
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[x].length; y++) {
+                Cell cell = grid[x][y];
+                if (!cell.isRevealed() && !cell.isFlagged()) {
+                    return false;
+                }
             }
         }
+        return true;
     }
-    return true;
-}
 
    
-    
+    /**
+     * Restarts the game by creating a new play area with the same dimensions as the current grid.
+     */
+
     public void restart() {
         Greenfoot.setWorld(new Play(grid.length,grid[0].length));
     }
     
+    /**
+     * Checks if the game has started.
+     * 
+     * @return true if the game has started, false otherwise.
+     */
+
     public boolean isStarted() {
         return started;
     }
     
+    
+    /**
+     * Starts the game by placing bombs on the grid, ensuring that the initial area around the specified start position
+     * does not contain bombs. It also marks the start of the game's timer.
+     *
+     * @param startRow the row index of the starting cell.
+     * @param startCol the column index of the starting cell.
+     */
+
     public void start(int startRow, int startCol) {
         timer.mark();
         started = true;
@@ -134,11 +218,19 @@ public class Play extends World
         }
     }
 
-    
+    /**
+     * Reveals all bomb locations on the grid and changes the game state to indicate a loss. It plays a sound effect
+     * when bombs are revealed. If a cell is flagged but does not contain a bomb, it updates the image to indicate a false flag.
+     */
+
     public void revealBombs()
     {
         state = -1;
         s.lose();
+        GreenfootSound sound = new GreenfootSound("lose.wav");
+        
+        sound.play();
+        
         for (int i = 0; i < grid.length; i++)
         {
             for (int j = 0; j < grid[i].length; j++)
@@ -146,11 +238,13 @@ public class Play extends World
                 Cell cell = grid[i][j];
                 if (cell.hasBomb() && !cell.isRevealed())
                 {
-                    cell.setImage(new GreenfootImage("bomb.png")); // Show bomb image for actual bombs
+                    GreenfootSound pop = new GreenfootSound("pop.mp3");
+                    sound.play();
+                    cell.setImage(new GreenfootImage(getTheme()+"bomb.png")); // Show bomb image for actual bombs
                 }
                 else if (!cell.hasBomb() && cell.isFlagged())
                 {
-                    cell.setImage(new GreenfootImage("notBomb.png")); // Show notBomb image for falsely flagged cells
+                    cell.setImage(new GreenfootImage(getTheme()+"notBomb.png")); // Show notBomb image for falsely flagged cells
                 }
             }
         }
@@ -164,6 +258,14 @@ public class Play extends World
         flags++;
     }
     
+    /**
+     * Checks for bombs in adjacent cells around the specified coordinates and updates the display accordingly.
+     * If bombs are found, it displays the count; if none are found, it recursively reveals adjacent cells.
+     *
+     * @param x the x-coordinate of the cell to check.
+     * @param y the y-coordinate of the cell to check.
+     */
+
     public void checkAdjacentBombs(int x, int y){
         int adjBombs = 0;
         List<int[]> adjacentCoordinates = new ArrayList<>();

@@ -1,7 +1,14 @@
 #BlueJ class context
 comment0.target=Store
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Store\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Store\ here.\r\n\ \r\n\ @author\ Bryson,\ Bonnie,\ Matthew,\ David\r\n
 comment1.params=
 comment1.target=Store()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Store.\r\n\ \r\n
-numComments=2
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ displayThemes()
+comment3.text=\r\n\ Displays\ selectable\ game\ themes\ in\ a\ row.\ Each\ theme\ is\ represented\ by\ a\ square,\r\n\ and\ they\ are\ displayed\ centered\ horizontally\ within\ the\ window.\r\n
+comment4.params=
+comment4.target=void\ displayPowers()
+comment4.text=\r\n\ Displays\ selectable\ game\ powers\ in\ a\ grid\ layout.\ Each\ power\ is\ represented\ by\ a\ square,\r\n\ and\ they\ are\ displayed\ centered\ horizontally\ with\ a\ slight\ vertical\ offset\ in\ the\ game\ window.\r\n
+numComments=5

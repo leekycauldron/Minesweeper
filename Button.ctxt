@@ -2,10 +2,9 @@
 comment0.target=Button
 comment1.params=normalImageFile\ hoveredImageFile
 comment1.target=Button(java.lang.String,\ java.lang.String)
-comment1.text=\r\n\ Constructor\ to\ initialize\ the\ button\ with\ images\ for\ both\ states.\r\n
+comment1.text=\r\n\ Constructs\ a\ new\ Button\ object\ with\ specified\ images\ for\ its\ normal\ and\ hovered\ states.\r\n\ The\ images\ are\ scaled\ to\ fit\ the\ button\ size.\r\n\r\n\ @param\ normalImageFile\ the\ file\ path\ for\ the\ normal\ state\ image.\r\n\ @param\ hoveredImageFile\ the\ file\ path\ for\ the\ hovered\ state\ image.\r\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ Act\ method\ to\ check\ for\ mouse\ hover\ state.\r\n
 comment3.params=clickAction
 comment3.target=void\ setOnClickAction(java.lang.Runnable)
 numComments=4

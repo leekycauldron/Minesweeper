@@ -7,10 +7,13 @@ public class Settings extends World
     private String mode;
     private GreenfootImage modeImage;
     private Mode modeDisplay;
+    private SelectMenu themeMenu;
+  
     
     public Settings()
     {    
-        super(600, 400, 1); 
+        super(720, 600, 1); 
+
         
         GreenfootImage bg = new GreenfootImage(getWidth(), getHeight());
         bg.setColor(Color.BLACK);
@@ -63,14 +66,22 @@ public class Settings extends World
         addObject(medium, centerX, centerY + yOffset);
         addObject(hard, centerX + hard.getImage().getWidth() + buttonSpacing, centerY + yOffset);
         
+        themeMenu = new SelectMenu();
+        addObject(themeMenu,getWidth()/2,getHeight()-125);
+        themeMenu.prepare();
+        
         Button save = new Button("save.png","saves.png");
         save.setOnClickAction(() -> {
-           writeModeToFile("settings.txt",mode);
+           writeToFile("settings.txt",mode,themeMenu.getTheme());
            Greenfoot.setWorld(new Title());
         });
         addObject(save, centerX,getHeight()-50);
         
+        
+        
     }
+    
+      
     
     private void updateMode() {
         removeObject(modeDisplay);
@@ -78,35 +89,8 @@ public class Settings extends World
         addObject(modeDisplay,(getWidth() / 2) + 60,120);
     }
     
-    private void writeModeToFile(String filePath, String mode) {
-        try {
-            // Read existing file contents
-            List<String> lines = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    lines.add(line);
-                }
-            } catch (FileNotFoundException e) {
-                // If the file doesn't exist, just start with an empty list
-            }
-    
-            // Update the first line with the new mode
-            if (!lines.isEmpty()) {
-                lines.set(0, mode);
-            } else {
-                lines.add(mode);
-            }
-    
-            // Write updated contents back to the file
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                for (String line : lines) {
-                    writer.write(line);
-                    writer.newLine();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void writeToFile(String filePath, String mode,String theme) {
+            Utils.changeLineValue(filePath,0,mode);
+            Utils.changeLineValue(filePath,10,theme);
     }
 }
